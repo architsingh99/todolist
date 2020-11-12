@@ -142,7 +142,7 @@
 
     <ul id="myUL">
         @foreach($todolist as $key => $value)
-        <li class="{{$value->status == 1 ? 'checked' : ''}}" value="{{$value->task_name}}">{{$value->task_name}}</li>
+        <li class="{{$value->status == 1 ? 'checked' : ''}}" value="{{$value->task_name}}"><input type="checkbox" style="width: 5%;" {{$value->status == 1 ? 'checked' : ''}}>{{$value->task_name}}</li>
         @endforeach
     </ul>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -295,12 +295,17 @@
                     } else {
                         document.getElementById("myUL").appendChild(li);
                     }
+                    li.setAttribute("value", item.task_name);
                     document.getElementById("myInput").value = "";
-
+                    var checkBox = document.createElement("INPUT");
+                    checkBox.setAttribute("type", "checkbox");
+                    checkBox.setAttribute("checked", true);
+                    checkBox.setAttribute("style", "width: 5%");
                     var span = document.createElement("SPAN");
                     var txt = document.createTextNode("\u00D7");
                     span.className = "close";
                     span.appendChild(txt);
+                    li.appendChild(checkBox);
                     li.appendChild(span);
 
                     for (i = 0; i < close.length; i++) {
